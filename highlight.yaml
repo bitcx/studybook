@@ -1,0 +1,65 @@
+# Copyright (C) 2026 bitcx and Contributors. Licensed under Apache License 2.0.
+# studybook highlight configuration
+# defines syntax highlighting rules for code blocks
+# each rule has: pattern (regex string), color, and optional bold/italic flags
+
+rules:
+  # keywords - control flow and declarations
+  - name: keyword
+    pattern: "\\b(define|immut|mut|struct|return|if|else|while|for|in|import|export|use|let|const|fn|func|pub|priv|self|super)\\b"
+    color: "#000080"
+    bold: true
+
+  # built-in types
+  - name: type
+    pattern: "\\b(i8|i16|i32|i64|i128|u8|u16|u32|u64|u128|f32|f64|str|bool|void|int|float|char|byte|string|any|never)\\b"
+    color: "#800080"
+    bold: false
+
+  # built-in functions
+  - name: builtin
+    pattern: "\\b(print|scan|println|eprintln|format|len|push|pop|append|remove|contains|keys|values|typeof|sizeof)\\b"
+    color: "#000080"
+    bold: false
+
+  # string literals (double quotes)
+  - name: string
+    pattern: "\"(?:[^\"\\\\]|\\\\.)*\""
+    color: "#800000"
+    bold: false
+
+  # single-quoted strings / chars
+  - name: char
+    pattern: "'(?:[^'\\\\]|\\\\.)*'"
+    color: "#800000"
+    bold: false
+
+  # line comments starting with #
+  - name: comment_hash
+    pattern: "#[^\\n]*"
+    color: "#008000"
+    italic: true
+
+  # line comments starting with //
+  - name: comment_slash
+    pattern: "//[^\\n]*"
+    color: "#008000"
+    italic: true
+
+  # numeric literals (integers and floats)
+  - name: number
+    pattern: "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b"
+    color: "#800000"
+    bold: false
+
+  # reference operator
+  - name: ref
+    pattern: "&"
+    color: "#c0392b"
+    bold: false
+
+  # boolean literals
+  - name: boolean
+    pattern: "\\b(true|false|null|nil|None|Some)\\b"
+    color: "#800080"
+    bold: false

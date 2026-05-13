@@ -1,0 +1,322 @@
+/* Copyright (C) 2026 bitcx and Contributors. Licensed under Apache License 2.0. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #008080;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  min-height: 100vh;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Segoe UI', Arial, sans-serif;
+}
+
+.win95-raised {
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf;
+}
+
+.win95-sunken {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
+}
+
+.win95-window {
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  box-shadow: 1px 1px 0 #808080, -1px -1px 0 #dfdfdf, 4px 4px 8px rgba(0,0,0,0.4);
+}
+
+.win95-titlebar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.win95-titlebar-btn {
+  background-color: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  width: 16px;
+  height: 14px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.win95-menubar {
+  background-color: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #808080;
+  padding: 2px 0;
+  display: flex;
+  font-size: 11px;
+  user-select: none;
+}
+
+.win95-menu-item {
+  padding: 4px 10px;
+  margin: 1px 2px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.win95-menu-item:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.win95-btn {
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf;
+  padding: 4px 16px;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  border-style: solid;
+}
+
+.win95-btn:active {
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
+  padding-top: 5px;
+  padding-left: 17px;
+}
+
+.win95-code {
+  background-color: #ffffff;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #404040;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 12px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  line-height: 1.6;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.win95-divider {
+  border: none;
+  border-top: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  margin: 0;
+}
+
+.win95-groupbox {
+  border: 1px solid #808080;
+  box-shadow: 1px 1px 0 #ffffff;
+  padding: 16px 12px 12px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.win95-groupbox-label {
+  position: absolute;
+  top: -9px;
+  left: 8px;
+  background-color: #c0c0c0;
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+}
+
+.tree-item {
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  user-select: none;
+  color: #000000;
+  text-decoration: none;
+}
+
+.tree-item:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.tree-item.active {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.md-content {
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #000000;
+}
+
+.md-content h1 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000080;
+  border-bottom: 2px solid #808080;
+  padding-bottom: 4px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.md-content h2 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #000060;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.md-content h3 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000040;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.md-content p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.md-content ul, .md-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 20px;
+}
+
+.md-content li {
+  margin-bottom: 3px;
+}
+
+.md-content a {
+  color: #000080;
+}
+
+.md-content a:hover {
+  color: #0000ff;
+}
+
+.md-content strong {
+  font-weight: bold;
+}
+
+.md-content em {
+  font-style: italic;
+}
+
+.md-content code {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 11px;
+  background: #ffffff;
+  border: 1px solid #808080;
+  padding: 1px 3px;
+}
+
+.md-content pre {
+  margin: 10px 0;
+}
+
+.md-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.md-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+
+.md-content th {
+  background-color: #000080;
+  color: #ffffff;
+  padding: 4px 8px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.md-content td {
+  padding: 3px 8px;
+  border: 1px solid #808080;
+}
+
+.md-content tr:nth-child(even) td {
+  background-color: #eeeeee;
+}
+
+.md-content blockquote {
+  margin: 10px 0;
+  padding: 6px 12px;
+  border-left: 4px solid #000080;
+  background: #e8e8e8;
+  font-style: italic;
+}
