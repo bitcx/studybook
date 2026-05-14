@@ -69,6 +69,13 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
   while (i < lines.length) {
     const line = lines[i];
 
+    // br
+    if (line.trim() === '<br>' || line.trim() === '<br/>' || line.trim() === '<br />') {
+      elements.push(<br key={i} />);
+      i++;
+      continue;
+    }
+
     // headings
     if (line.startsWith('### ')) {
       elements.push(<h3 key={i}>{inlineFormat(line.slice(4))}</h3>);
