@@ -21,12 +21,11 @@ define main() {
 }
 ```
 
+<br>
 For run:
 
 ```bit
-
 bitc hello.bit # run
 # or compile & link:
 bitc hello.bit -o hello
-
 ```
