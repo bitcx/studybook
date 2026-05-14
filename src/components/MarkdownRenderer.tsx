@@ -70,8 +70,19 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
     const line = lines[i];
 
     // br
-    if (line.trim() === '<br>' || line.trim() === '<br/>' || line.trim() === '<br />') {
-      elements.push(<br key={i} />);
+    if (line.includes('<br>') || line.includes('<br/>') || line.includes('<br />')) {
+      const parts = line.split(/(<br\s*\/?>)/gi);
+      const formattedParts: React.ReactNode[] = [];
+
+      for (let part of parts) {
+        if (part.match(/^<br\s*\/?>$/i)) {
+          formattedParts.push(<br key={formattedParts.length} />);
+        } else if (part.trim()) {
+          formattedParts.push(inlineFormat(part));
+        }
+      }
+
+      elements.push(<p key={i}>{formattedParts}</p>);
       i++;
       continue;
     }
