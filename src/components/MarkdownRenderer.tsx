@@ -69,24 +69,6 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
   while (i < lines.length) {
     const line = lines[i];
 
-    // br support
-    if (line.includes('<br')) {
-      const parts = line.split(/(<br\s*\/?\s*>)/gi);
-      const formatted: React.ReactNode[] = [];
-
-      parts.forEach((part, idx) => {
-        if (part.match(/^<br\s*\/?\s*>$/i)) {
-          formatted.push(<br key={idx} />);
-        } else if (part.trim().length > 0) {
-          formatted.push(inlineFormat(part));
-        }
-      });
-
-      elements.push(<p key={i}>{formatted}</p>);
-      i++;
-      continue;
-    }
-
     // headings
     if (line.startsWith('### ')) {
       elements.push(<h3 key={i}>{inlineFormat(line.slice(4))}</h3>);
@@ -199,6 +181,21 @@ const MarkdownTable: React.FC<{ lines: string[] }> = ({ lines }) => {
 
 // applies inline formatting: bold, italic, code, links
 function inlineFormat(text: string): React.ReactNode {
+  const brParts = text.split(/(<br\s*\/?\s*>)/gi);
+  
+  if (brParts.length > 1) {
+    return brParts.map((part, idx) => {
+      if (part.match(/^<br\s*\/?\s*>$/i)) {
+        return <br key={`br-${idx}`} />;
+      }
+      return <React.Fragment key={idx}>{formatInline(part)}</React.Fragment>;
+    });
+  }
+  
+  return formatInline(text);
+}
+
+function formatInline(text: string): React.ReactNode {
   const parts: React.ReactNode[] = [];
   const regex = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0;
