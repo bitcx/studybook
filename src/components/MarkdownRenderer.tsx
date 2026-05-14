@@ -58,7 +58,7 @@ function splitCodeBlocks(md: string): Segment[] {
   }
 
   return segments;
-}
+};
 
 // renders prose markdown to react elements
 const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
@@ -69,11 +69,10 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
   while (i < lines.length) {
     const line = lines[i];
 
-    // br
+    // br support
     if (line.includes('<br>') || line.includes('<br/>') || line.includes('<br />')) {
       const parts = line.split(/(<br\s*\/?>)/gi);
       const formattedParts: React.ReactNode[] = [];
-
       for (let part of parts) {
         if (part.match(/^<br\s*\/?>$/i)) {
           formattedParts.push(<br key={formattedParts.length} />);
@@ -81,7 +80,6 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
           formattedParts.push(inlineFormat(part));
         }
       }
-
       elements.push(<p key={i}>{formattedParts}</p>);
       i++;
       continue;
