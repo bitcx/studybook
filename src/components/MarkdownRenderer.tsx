@@ -141,7 +141,7 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
         paraLines.push(lines[i]);
         i++;
       }
-      elements.push(<p key={i}>{inlineFormat(paraLines.join(' '))}</p>);
+      elements.push(<p key={i}>{inlineFormat(paraLines.join('\n'))}</p>);
       continue;
     }
 
@@ -181,38 +181,26 @@ const MarkdownTable: React.FC<{ lines: string[] }> = ({ lines }) => {
 
 // applies inline formatting: bold, italic, code, links
 function inlineFormat(text: string): React.ReactNode {
-  const brParts = text.split(/(<br\s*\/?\s*>)/gi);
-  
-  if (brParts.length > 1) {
-    return brParts.map((part, idx) => {
-      if (part.match(/^<br\s*\/?\s*>$/i)) {
-        return <br key={`br-${idx}`} />;
-      }
-      return <React.Fragment key={idx}>{formatInline(part)}</React.Fragment>;
-    });
-  }
-  
-  return formatInline(text);
-}
-
-function formatInline(text: string): React.ReactNode {
   const parts: React.ReactNode[] = [];
-  const regex = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
+  const regex = /(<br\s*\/?\s*>)|\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0;
   let match: RegExpExecArray | null;
+  let key = 0;
 
   while ((match = regex.exec(text)) !== null) {
     if (match.index > last) {
       parts.push(text.slice(last, match.index));
     }
     if (match[1] !== undefined) {
-      parts.push(<strong key={match.index}>{match[1]}</strong>);
+      parts.push(<br key={`br-${key++}`} />);
     } else if (match[2] !== undefined) {
-      parts.push(<em key={match.index}>{match[2]}</em>);
+      parts.push(<strong key={key++}>{match[2]}</strong>);
     } else if (match[3] !== undefined) {
-      parts.push(<code key={match.index}>{match[3]}</code>);
+      parts.push(<em key={key++}>{match[3]}</em>);
     } else if (match[4] !== undefined) {
-      parts.push(<a key={match.index} href={match[5]} target="_blank" rel="noopener noreferrer">{match[4]}</a>);
+      parts.push(<code key={key++}>{match[4]}</code>);
+    } else if (match[5] !== undefined) {
+      parts.push(<a key={key++} href={match[6]} target="_blank" rel="noopener noreferrer">{match[5]}</a>);
     }
     last = match.index + match[0].length;
   }
