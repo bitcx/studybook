@@ -27,7 +27,15 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
+    if (tree.length === 0) return;
+
     const currentPath = location.pathname || '/';
+
+    if (currentPath === '/' || currentPath === '') {
+      navigate('/introduction', { replace: true });
+      return;
+    }
+
     const node = findNode(tree, currentPath);
 
     if (node && node.filePath) {
@@ -39,17 +47,9 @@ function AppContent() {
           setLoading(false);
         });
       }
-    } else if (tree.length > 0) {
-      const defaultPath = '/introduction';
-      const defaultNode = findNode(tree, defaultPath);
-  
-      if (defaultNode) {
-        navigate(defaultPath, { replace: true });
-      } else {
-        const first = findFirstPage(tree);
-        if (first) navigate(first, { replace: true });
-      }
-}
+    } else {
+      navigate('/introduction', { replace: true });
+    }
   }, [location.pathname, tree, navigate]);
 
   const handleNavigate = (path: string) => {
@@ -157,17 +157,6 @@ const App: React.FC = () => {
     </HashRouter>
   );
 };
-
-function findFirstPage(nodes: PageNode[]): string | null {
-  for (const node of nodes) {
-    if (!node.isSection && node.filePath) return node.path;
-    if (node.isSection) {
-      const found = findFirstPage(node.children);
-      if (found) return found;
-    }
-  }
-  return null;
-}
 
 function findNode(nodes: PageNode[], path: string): PageNode | null {
   for (const node of nodes) {
