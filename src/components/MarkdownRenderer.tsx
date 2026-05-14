@@ -70,17 +70,19 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
     const line = lines[i];
 
     // br support
-    if (line.includes('<br>') || line.includes('<br/>') || line.includes('<br />')) {
-      const parts = line.split(/(<br\s*\/?>)/gi);
-      const formattedParts: React.ReactNode[] = [];
-      for (let part of parts) {
-        if (part.match(/^<br\s*\/?>$/i)) {
-          formattedParts.push(<br key={formattedParts.length} />);
-        } else if (part.trim()) {
-          formattedParts.push(inlineFormat(part));
+    if (line.includes('<br')) {
+      const parts = line.split(/(<br\s*\/?\s*>)/gi);
+      const formatted: React.ReactNode[] = [];
+
+      parts.forEach((part, idx) => {
+        if (part.match(/^<br\s*\/?\s*>$/i)) {
+          formatted.push(<br key={idx} />);
+        } else if (part.trim().length > 0) {
+          formatted.push(inlineFormat(part));
         }
-      }
-      elements.push(<p key={i}>{formattedParts}</p>);
+      });
+
+      elements.push(<p key={i}>{formatted}</p>);
       i++;
       continue;
     }
@@ -150,7 +152,7 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
       continue;
     }
 
-    // paragraph (non-empty line)
+    // paragraph
     if (line.trim()) {
       const paraLines: string[] = [];
       while (i < lines.length && lines[i].trim()) {
@@ -161,7 +163,6 @@ const MarkdownText: React.FC<{ text: string }> = ({ text }) => {
       continue;
     }
 
-    // empty line
     i++;
   }
 
@@ -199,7 +200,6 @@ const MarkdownTable: React.FC<{ lines: string[] }> = ({ lines }) => {
 // applies inline formatting: bold, italic, code, links
 function inlineFormat(text: string): React.ReactNode {
   const parts: React.ReactNode[] = [];
-  // match bold, italic, inline code, links in one pass
   const regex = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0;
   let match: RegExpExecArray | null;
