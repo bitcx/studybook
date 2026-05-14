@@ -11,11 +11,19 @@ The syntax is minimal and readable, making it easy to learn while remaining powe
 
 ## Quick Start
 
-Install the compiler and run your first program:
+Install the compiler and write your first program:
 
 ```bit
+# hello.bit
 define main() {
     immut name:str = "World";
     print("Hello, {0}!", &name);
 }
+```
+For run:
+
+```bit 
+bitc hello.bit # run
+# or compile & link:
+bitc hello.bit -o hello
 ```
