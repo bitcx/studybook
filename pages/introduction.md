@@ -20,10 +20,13 @@ define main() {
     print("Hello, {0}!", &name);
 }
 ```
+
 For run:
 
-```bit 
+```bit
+
 bitc hello.bit # run
 # or compile & link:
 bitc hello.bit -o hello
+
 ```
