@@ -11,4 +11,6 @@ irm https://bitcx.github.io/install.ps1 | iex
 ```
 
 
-After running the command, the installation script will start. You will have a choice between automatic or manual installation. It is recommended to choose automatic.
+After running the command, the installation script will start.<br>
+You will have a choice between automatic or manual installation.<br>
+It is recommended to choose automatic.
