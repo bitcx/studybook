@@ -1,6 +1,7 @@
 # Introduction
 
 Welcome to **Bit** — a statically typed, compiled programming language designed for simplicity and performance.<br>
+
 The syntax is minimal and readable, making it easy to learn while remaining powerful enough for systems programming.
 
 ## Why Bit?
