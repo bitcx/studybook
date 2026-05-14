@@ -10,7 +10,7 @@ curl -fsSL bitcx.github.io/install.sh | sh
 irm https://bitcx.github.io/install.ps1 | iex
 ```
 
-
+<br>
 After running the command, the installation script will start.<br>
 You will have a choice between automatic or manual installation.<br>
 It is recommended to choose automatic.
