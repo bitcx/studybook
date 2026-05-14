@@ -40,9 +40,16 @@ function AppContent() {
         });
       }
     } else if (tree.length > 0) {
-      const first = findFirstPage(tree);
-      if (first) navigate(first, { replace: true });
-    }
+      const defaultPath = '/introduction';
+      const defaultNode = findNode(tree, defaultPath);
+  
+      if (defaultNode) {
+        navigate(defaultPath, { replace: true });
+      } else {
+        const first = findFirstPage(tree);
+        if (first) navigate(first, { replace: true });
+      }
+}
   }, [location.pathname, tree, navigate]);
 
   const handleNavigate = (path: string) => {
