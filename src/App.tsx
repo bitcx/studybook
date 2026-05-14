@@ -1,6 +1,6 @@
 // Copyright (C) 2026 bitcx and Contributors. Licensed under Apache License 2.0.
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { HashRouter, useLocation, useNavigate } from 'react-router-dom';
 import Win95Window from './components/Win95Window';
 import TreeNode from './components/TreeNode';
 import MarkdownRenderer from './components/MarkdownRenderer';
