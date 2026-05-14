@@ -7,7 +7,7 @@ curl -fsSL bitcx.github.io/install.sh | sh
 ```
 **Windows Powershell**
 ```
-irm https://bitcx.github.io/install.ps1 | iex
+irm bitcx.github.io/install.ps1 | iex
 ```
 
 <br>
